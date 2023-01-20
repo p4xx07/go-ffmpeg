@@ -1,20 +1,17 @@
 package test
 
 import (
+	"fmt"
 	"github.com/DanielEnricoBotta94/go-ffmpeg/configuration"
-	ffmpeg2 "github.com/DanielEnricoBotta94/go-ffmpeg/ffmpeg"
-	"os"
-	"testing"
+	"github.com/DanielEnricoBotta94/go-ffmpeg/ffmpeg"
 )
-
-var ffmpeg ffmpeg2.Ffmpeg
 
 const input = "/Users/danielenricobotta/Work/ffmpeg/intro.mp4"
 const output = "/Users/danielenricobotta/Work/ffmpeg/output.mp4"
 
-func TestMain(m *testing.M) {
-	ffmpeg = ffmpeg2.Ffmpeg{
-		Arguments:     ffmpeg2.Arguments{},
+func GetFfmpeg() *ffmpeg.Ffmpeg {
+	f := ffmpeg.Ffmpeg{
+		Arguments:     ffmpeg.Arguments{},
 		Configuration: configuration.Configuration{},
 		Headers: []string{
 			"-y",
@@ -23,7 +20,10 @@ func TestMain(m *testing.M) {
 		},
 	}
 
-	ffmpeg.Configuration.Init()
-	code := m.Run()
-	os.Exit(code)
+	f.Configuration.Init()
+	return &f
+}
+
+func PrintPanic(expected any, actual any) {
+	panic(fmt.Sprintf("\nexpected: \t%s\nactual: \t%s", expected, actual))
 }

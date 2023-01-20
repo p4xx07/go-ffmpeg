@@ -5,6 +5,7 @@ import (
 	"github.com/DanielEnricoBotta94/go-ffmpeg/arguments"
 	"github.com/DanielEnricoBotta94/go-ffmpeg/configuration"
 	"os/exec"
+	"strings"
 )
 
 type Ffmpeg struct {
@@ -13,11 +14,14 @@ type Ffmpeg struct {
 	Headers       []string
 }
 
+type Builder Ffmpeg
+
 type Arguments struct {
-	Inputs        arguments.Inputs
-	Outputs       arguments.Outputs
-	FilterComplex arguments.FilterComplex
-	Options       arguments.Options
+	Inputs       arguments.Inputs
+	Outputs      arguments.Outputs
+	VideoFilters arguments.VideoFilters
+	AudioFilters arguments.AudioFilters
+	Options      arguments.Options
 }
 
 func (f *Ffmpeg) Input(path string) *Ffmpeg {
@@ -32,22 +36,28 @@ func (f *Ffmpeg) Inputs(paths ...string) *Ffmpeg {
 	return f
 }
 
-func (f *Ffmpeg) Output(path string) *Ffmpeg {
+func (f *Ffmpeg) Output(path string) *Builder {
+	f.Arguments.Outputs.Append(path)
+	return (*Builder)(f)
+}
+
+func (f *Builder) Output(path string) *Builder {
 	f.Arguments.Outputs.Append(path)
 	return f
 }
 
-func (f *Ffmpeg) Outputs(paths ...string) *Ffmpeg {
+func (f *Ffmpeg) Outputs(paths ...string) *Builder {
 	for _, p := range paths {
 		f.Arguments.Outputs.Append(p)
 	}
-	return f
+	return (*Builder)(f)
 }
 
-func (f *Ffmpeg) Build() []string {
+func (f *Builder) Build() []string {
 	var args []string
 	args = append(args, f.Arguments.Inputs.Build()...)
-	args = append(args, f.Arguments.FilterComplex.Build()...)
+	args = append(args, f.Arguments.VideoFilters.Build()...)
+	args = append(args, f.Arguments.AudioFilters.Build()...)
 	args = append(args, f.Arguments.Options.Build()...)
 	args = append(args, f.Arguments.Outputs.Build()...)
 
@@ -60,6 +70,12 @@ func (f *Ffmpeg) Run(args []string) error {
 	command.Args = append(command.Args, f.Headers...)
 	command.Args = append(command.Args, args...)
 
+	command.Args = purifyArgs(command.Args)
+
+	if f.Configuration.IsDebug {
+		fmt.Println(strings.Join(command.Args, " "))
+	}
+
 	result, err := command.CombinedOutput()
 	if err != nil {
 		fmt.Println(fmt.Sprint(err) + ": " + string(result))
@@ -67,4 +83,14 @@ func (f *Ffmpeg) Run(args []string) error {
 	}
 
 	return nil
+}
+
+func purifyArgs(args []string) []string {
+	var result []string
+	for _, v := range args {
+		if v != "" {
+			result = append(result, v)
+		}
+	}
+	return result
 }
