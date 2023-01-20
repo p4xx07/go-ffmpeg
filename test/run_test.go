@@ -1,6 +1,8 @@
 package test
 
 import (
+	"github.com/DanielEnricoBotta94/go-ffmpeg/ffmpeg/codec_audio"
+	"github.com/DanielEnricoBotta94/go-ffmpeg/ffmpeg/codec_video"
 	"testing"
 )
 
@@ -17,7 +19,7 @@ func Test_Run(t *testing.T) {
 	}
 }
 
-func Disabled_Test_Encode(t *testing.T) {
+func Test_Encode(t *testing.T) {
 	input := "/Users/danielenricobotta/Work/ffmpeg/input.mp4"
 
 	f := GetFfmpeg()
@@ -26,6 +28,8 @@ func Disabled_Test_Encode(t *testing.T) {
 		Scale(500, 500).
 		Fps(15).
 		Flanger(15).
+		CodecVideo(codec_video.LIBX264).
+		CodecAudio(codec_audio.AAC).
 		Output(output).
 		Build()
 
