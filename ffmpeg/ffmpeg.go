@@ -78,7 +78,7 @@ func (f *Ffmpeg) Run(args []string) error {
 
 	result, err := command.CombinedOutput()
 	if err != nil {
-		fmt.Println(fmt.Sprint(err) + ": " + string(result))
+		err = fmt.Errorf(fmt.Sprint(err) + ": " + string(result))
 		return err
 	}
 
