@@ -10,7 +10,7 @@ jobs:
     #
     steps:
       - uses: actions/checkout@v3
-       - shell: bash
+      - shell: bash
         name: Create exe and add exe to PATH
         run: |
           apt-get -y update
