@@ -2,7 +2,7 @@ package ffmpeg
 
 import (
 	"fmt"
-	"github.com/DanielEnricoBotta94/go-ffmpeg/helper"
+	"github.com/Paxx-RnD/go-ffmpeg/helper"
 	"os/exec"
 	"strings"
 )

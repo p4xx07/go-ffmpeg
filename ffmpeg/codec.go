@@ -1,8 +1,8 @@
 package ffmpeg
 
 import (
-	"github.com/DanielEnricoBotta94/go-ffmpeg/constants/codec_audio"
-	"github.com/DanielEnricoBotta94/go-ffmpeg/constants/codec_video"
+	"github.com/Paxx-RnD/go-ffmpeg/constants/codec_audio"
+	"github.com/Paxx-RnD/go-ffmpeg/constants/codec_video"
 )
 
 func (f *Ffmpeg) CodecVideo(codec codec_video.CodecVideo) *Ffmpeg {

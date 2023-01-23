@@ -2,7 +2,7 @@ package test
 
 import (
 	"fmt"
-	"github.com/DanielEnricoBotta94/go-ffmpeg/constants/common_bitrates"
+	"github.com/Paxx-RnD/go-ffmpeg/constants/common_bitrates"
 	"strings"
 	"testing"
 )

@@ -1,8 +1,8 @@
 package ffmpeg
 
 import (
-	"github.com/DanielEnricoBotta94/go-ffmpeg/arguments"
-	"github.com/DanielEnricoBotta94/go-ffmpeg/configuration"
+	"github.com/Paxx-RnD/go-ffmpeg/arguments"
+	"github.com/Paxx-RnD/go-ffmpeg/configuration"
 )
 
 type Ffmpeg struct {

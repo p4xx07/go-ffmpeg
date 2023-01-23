@@ -2,10 +2,10 @@ package test
 
 import (
 	"fmt"
-	"github.com/DanielEnricoBotta94/go-ffmpeg/configuration"
-	"github.com/DanielEnricoBotta94/go-ffmpeg/env"
-	"github.com/DanielEnricoBotta94/go-ffmpeg/ffmpeg"
-	"github.com/DanielEnricoBotta94/go-ffmpeg/ffprobe"
+	"github.com/Paxx-RnD/go-ffmpeg/configuration"
+	"github.com/Paxx-RnD/go-ffmpeg/env"
+	"github.com/Paxx-RnD/go-ffmpeg/ffmpeg"
+	"github.com/Paxx-RnD/go-ffmpeg/ffprobe"
 	"os"
 	"testing"
 )
@@ -17,7 +17,10 @@ var (
 
 func TestMain(m *testing.M) {
 	if os.Getenv("APP_ENV") == "" {
-		os.Setenv("APP_ENV", "test")
+		err := os.Setenv("APP_ENV", "test")
+		if err != nil {
+			panic("could not set test env")
+		}
 	}
 	env.Load()
 	m.Run()

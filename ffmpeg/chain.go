@@ -2,8 +2,8 @@ package ffmpeg
 
 import (
 	"fmt"
-	"github.com/DanielEnricoBotta94/go-ffmpeg/constants/pixel_formats"
-	"github.com/DanielEnricoBotta94/go-ffmpeg/helper"
+	"github.com/Paxx-RnD/go-ffmpeg/constants/pixel_formats"
+	"github.com/Paxx-RnD/go-ffmpeg/helper"
 )
 
 type Chain Ffmpeg
