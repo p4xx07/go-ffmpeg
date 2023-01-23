@@ -13,8 +13,10 @@ jobs:
       - shell: bash
         name: Add FFmpeg to PATH
         run: |
-          sudo apt-get -y update
+          sudo add-apt-repository ppa:savoury1/ffmpeg4
           sudo add-apt-repository ppa:savoury1/ffmpeg5
+          sudo apt-get -y update
+          sudo apt-get -y upgrade && sudo apt-get dist-upgrade
           sudo apt-get -y install ffmpeg
       #
       - name: Setup Go ${{ matrix.go-version }}
