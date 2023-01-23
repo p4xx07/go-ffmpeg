@@ -3,16 +3,22 @@ package test
 import (
 	"fmt"
 	"github.com/DanielEnricoBotta94/go-ffmpeg/configuration"
+	"github.com/DanielEnricoBotta94/go-ffmpeg/env"
 	"github.com/DanielEnricoBotta94/go-ffmpeg/ffmpeg"
+	"testing"
 )
 
-const input = "assets/input.mp4"
-const output = "assets/output.mp4"
+const input = "/Users/danielenricobotta/Work/ffmpeg/intro.mp4"
+const output = "/Users/danielenricobotta/Work/ffmpeg/output.mp4"
+
+func TestMain(m *testing.M) {
+	env.Load()
+	m.Run()
+}
 
 func GetFfmpeg() *ffmpeg.Ffmpeg {
 	f := ffmpeg.Ffmpeg{
-		Arguments:     ffmpeg.Arguments{},
-		Configuration: configuration.Configuration{},
+		Configuration: configuration.GetConfiguration(),
 		Headers: []string{
 			"-y",
 			"-hide_banner",
@@ -20,7 +26,6 @@ func GetFfmpeg() *ffmpeg.Ffmpeg {
 		},
 	}
 
-	f.Configuration.Init()
 	return &f
 }
 

@@ -5,7 +5,7 @@ import (
 	"github.com/DanielEnricoBotta94/go-ffmpeg/arguments"
 )
 
-func (f *Ffmpeg) Flanger(delay int) *Ffmpeg {
+func (f *Ffmpeg) Flanger(delay float64) *Ffmpeg {
 	if delay < 0 {
 		delay = 0
 	} else if delay > 30 {
@@ -17,7 +17,7 @@ func (f *Ffmpeg) Flanger(delay int) *Ffmpeg {
 		Args: []arguments.FilterArgs{
 			{
 				Key:   "delay",
-				Value: fmt.Sprintf("%d", delay),
+				Value: fmt.Sprintf("%f", delay),
 			},
 		},
 	}
