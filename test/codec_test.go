@@ -2,8 +2,8 @@ package test
 
 import (
 	"fmt"
-	"github.com/DanielEnricoBotta94/go-ffmpeg/ffmpeg/codec_audio"
-	"github.com/DanielEnricoBotta94/go-ffmpeg/ffmpeg/codec_video"
+	"github.com/DanielEnricoBotta94/go-ffmpeg/constants/codec_audio"
+	"github.com/DanielEnricoBotta94/go-ffmpeg/constants/codec_video"
 	"strings"
 	"testing"
 )
