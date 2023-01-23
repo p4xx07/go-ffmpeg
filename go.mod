@@ -1,4 +1,4 @@
-module github.com/DanielEnricoBotta94/go-ffmpeg
+module github.com/Paxx-RnD/go-ffmpeg
 
 go 1.19
 
