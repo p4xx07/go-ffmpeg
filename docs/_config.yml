@@ -56,7 +56,7 @@ heading_anchors: true
 #
 # Aux links for the upper right navigation
 aux_links:
-  "KafkaJS WS":
+  "GO FFmpeg":
     - "//github.com/DanielEnricoBotta94/go-ffmpeg"
 #
 # Makes Aux links open in a new tab. Default is false
