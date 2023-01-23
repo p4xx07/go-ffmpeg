@@ -2,7 +2,7 @@ package ffmpeg
 
 import (
 	"fmt"
-	"github.com/DanielEnricoBotta94/go-ffmpeg/arguments"
+	"github.com/Paxx-RnD/go-ffmpeg/arguments"
 )
 
 func (f *Ffmpeg) Flanger(delay float64) *Ffmpeg {

@@ -2,7 +2,7 @@ package ffprobe
 
 import (
 	"encoding/json"
-	"github.com/DanielEnricoBotta94/go-ffmpeg/configuration"
+	"github.com/Paxx-RnD/go-ffmpeg/configuration"
 	"os/exec"
 )
 
