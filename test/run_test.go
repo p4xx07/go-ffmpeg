@@ -1,8 +1,8 @@
 package test
 
 import (
-	"github.com/DanielEnricoBotta94/go-ffmpeg/ffmpeg/codec_audio"
-	"github.com/DanielEnricoBotta94/go-ffmpeg/ffmpeg/codec_video"
+	"github.com/DanielEnricoBotta94/go-ffmpeg/constants/codec_audio"
+	"github.com/DanielEnricoBotta94/go-ffmpeg/constants/codec_video"
 	"testing"
 )
 
@@ -20,8 +20,6 @@ func Test_Run(t *testing.T) {
 }
 
 func Test_Encode(t *testing.T) {
-	input := "/Users/danielenricobotta/Work/ffmpeg/input.mp4"
-
 	f := GetFfmpeg()
 	args := f.
 		Input(input).

@@ -21,7 +21,8 @@ type Arguments struct {
 	Outputs      arguments.Outputs
 	VideoFilters arguments.VideoFilters
 	AudioFilters arguments.AudioFilters
-	Options      arguments.Options
+	//FilterGraph  filtergraph.FilterGraph
+	Options arguments.Options
 }
 
 func (f *Ffmpeg) Input(path string) *Ffmpeg {
@@ -56,8 +57,12 @@ func (f *Ffmpeg) Outputs(paths ...string) *Builder {
 func (f *Builder) Build() []string {
 	var args []string
 	args = append(args, f.Arguments.Inputs.Build()...)
+	//if len(*f.Arguments.FilterGraph.FilterChain) == 0 {
 	args = append(args, f.Arguments.VideoFilters.Build()...)
 	args = append(args, f.Arguments.AudioFilters.Build()...)
+	//} else {
+	//	args = append(args, f.Arguments.FilterGraph.Build()...)
+	//}
 	args = append(args, f.Arguments.Options.Build()...)
 	args = append(args, f.Arguments.Outputs.Build()...)
 

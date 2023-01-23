@@ -6,8 +6,8 @@ import (
 	"github.com/DanielEnricoBotta94/go-ffmpeg/ffmpeg"
 )
 
-const input = "/Users/danielenricobotta/Work/ffmpeg/intro.mp4"
-const output = "/Users/danielenricobotta/Work/ffmpeg/output.mp4"
+const input = "assets/input.mp4"
+const output = "assets/output.mp4"
 
 func GetFfmpeg() *ffmpeg.Ffmpeg {
 	f := ffmpeg.Ffmpeg{
