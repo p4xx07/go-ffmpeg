@@ -21,7 +21,7 @@ jobs:
       #
       - uses: FedericoCarboni/setup-ffmpeg@v2
         id: setup-ffmpeg
-      - run: ffmpeg -i asset/input.mp4 output.mp4
+      #- run: ffmpeg -i asset/input.mp4 output.mp4
       #
       - name: Setup Go ${{ matrix.go-version }}
         uses: actions/setup-go@v3
