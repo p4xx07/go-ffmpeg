@@ -19,6 +19,9 @@ jobs:
         run: |
           ls -l
           pwd
+          ls -l asset
+          cd asset
+          pwd
       #
       #    sudo add-apt-repository ppa:savoury1/ffmpeg4
       #    sudo add-apt-repository ppa:savoury1/ffmpeg5
