@@ -1,13 +1,5 @@
 package test
 
-/*
-
-import (
-	"fmt"
-	"github.com/DanielEnricoBotta94/go-ffmpeg/constants/codec_video"
-	"testing"
-)
-
 import (
 	"fmt"
 	"github.com/DanielEnricoBotta94/go-ffmpeg/constants/codec_audio"
@@ -17,7 +9,7 @@ import (
 )
 
 func Test_FilterComplex(t *testing.T) {
-	expected := fmt.Sprintf("-i %s -filter_complex  -c:v libx264 -c:a aac %s", input, output)
+	expected := fmt.Sprintf("-i %s -filter_complex [0:v]fps=fps=15.000000[fps1]; [fps1]scale=width=100.000000:height=100.000000[scale] -map [scale] -c:v libx264 -c:a aac %s", input, output)
 
 	f := GetFfmpeg()
 	args := f.
@@ -35,6 +27,4 @@ func Test_FilterComplex(t *testing.T) {
 	if actual != expected {
 		PrintPanic(expected, actual)
 	}
-
 }
-*/
