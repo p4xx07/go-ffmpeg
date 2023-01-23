@@ -13,9 +13,13 @@ jobs:
     #
     steps:
       - uses: actions/checkout@v3
-      #- shell: bash
-      #  name: Add FFmpeg to PATH
-      #  run: |
+      - shell: bash
+        #name: Add FFmpeg to PATH
+        name: check
+        run: |
+          ls -l
+          pwd
+      #
       #    sudo add-apt-repository ppa:savoury1/ffmpeg4
       #    sudo add-apt-repository ppa:savoury1/ffmpeg5
       #    sudo apt-get -y update
