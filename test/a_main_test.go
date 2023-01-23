@@ -16,7 +16,9 @@ var (
 )
 
 func TestMain(m *testing.M) {
-	os.Setenv("APP_ENV", "test")
+	if os.Getenv("APP_ENV") == "" {
+		os.Setenv("APP_ENV", "test")
+	}
 	env.Load()
 	m.Run()
 }
