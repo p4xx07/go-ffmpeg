@@ -8,8 +8,10 @@ import (
 	"testing"
 )
 
-const input = "/Users/danielenricobotta/Work/ffmpeg/intro.mp4"
-const output = "/Users/danielenricobotta/Work/ffmpeg/output.mp4"
+var (
+	input  string
+	output string
+)
 
 func TestMain(m *testing.M) {
 	env.Load()
@@ -25,6 +27,9 @@ func GetFfmpeg() *ffmpeg.Ffmpeg {
 			"-loglevel", "info",
 		},
 	}
+
+	input = f.Configuration.TestInput
+	output = f.Configuration.TestOutput
 
 	return &f
 }

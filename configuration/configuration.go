@@ -6,6 +6,8 @@ type Configuration struct {
 	FfmpegPath  string `env:"FFMPEG_PATH"`
 	FfprobePath string `env:"FFPROBE_PATH"`
 	IsDebug     bool   `env:"IS_DEBUG"`
+	TestInput   string `env:"TEST_INPUT"`
+	TestOutput  string `env:"TEST_OUTPUT"`
 }
 
 func GetConfiguration() Configuration {
