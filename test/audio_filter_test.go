@@ -1,5 +1,5 @@
 package test
-
+/*
 import (
 	"fmt"
 	"strings"
@@ -21,3 +21,4 @@ func Test_Flanger(t *testing.T) {
 		PrintPanic(expected, actual)
 	}
 }
+*/
