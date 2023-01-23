@@ -5,6 +5,8 @@ import (
 	"github.com/DanielEnricoBotta94/go-ffmpeg/configuration"
 	"github.com/DanielEnricoBotta94/go-ffmpeg/env"
 	"github.com/DanielEnricoBotta94/go-ffmpeg/ffmpeg"
+	"github.com/DanielEnricoBotta94/go-ffmpeg/ffprobe"
+	"os"
 	"testing"
 )
 
@@ -14,6 +16,7 @@ var (
 )
 
 func TestMain(m *testing.M) {
+	os.Setenv("APP_ENV", "test")
 	env.Load()
 	m.Run()
 }
@@ -26,6 +29,17 @@ func GetFfmpeg() *ffmpeg.Ffmpeg {
 			"-hide_banner",
 			"-loglevel", "info",
 		},
+	}
+
+	input = f.Configuration.TestInput
+	output = f.Configuration.TestOutput
+
+	return &f
+}
+
+func GetFfprobe() *ffprobe.Ffprobe {
+	f := ffprobe.Ffprobe{
+		Configuration: configuration.GetConfiguration(),
 	}
 
 	input = f.Configuration.TestInput

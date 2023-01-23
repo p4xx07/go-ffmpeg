@@ -33,9 +33,4 @@ func Load() {
 
 		return
 	}
-
-	err := godotenv.Load("./env/.env.prod")
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
 }
