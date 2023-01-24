@@ -26,6 +26,18 @@ func (p *Probe) GetFps() (float64, error) {
 	return fps, nil
 }
 
+func (p *Probe) GetResolution() (int, int) {
+	var videoStream Stream
+	for _, stream := range p.Streams {
+		if stream.CodecType == "video" {
+			videoStream = stream
+			break
+		}
+	}
+
+	return videoStream.Width, videoStream.Height
+}
+
 func (p *Probe) GetStreamDuration(codecType string) (float64, error) {
 	var selected Stream
 	for _, stream := range p.Streams {
