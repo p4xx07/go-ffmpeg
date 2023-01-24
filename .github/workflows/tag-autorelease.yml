@@ -1,41 +1,38 @@
-name: "tagged-release"
-#
+name: Release on Tag
+
 on:
   push:
     tags:
-      - '**'  
-#
-env:
-  APP_ENV: runner
-#
+      - 'v*.*.*'
+
 jobs:
-  tagged-release:
-    name: "Tagged Release"
-    runs-on: "ubuntu-latest"
-    #
+  build-and-test:
+    runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v3
-      - uses: FedericoCarboni/setup-ffmpeg@v2
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Add ffmpeg dependency
+        uses: FedericoCarboni/setup-ffmpeg@v2
         id: setup-ffmpeg
-      #
-      - name: Setup Go 1.19
-        uses: actions/setup-go@v3
+
+      - name: Setup Go
+        uses: actions/setup-go@v2
         with:
-          go-version: 1.19
-      #
-      - name: Build
-        run: go build -v ./... 
-      #
-      - name: Test with the Go CLI
-        run: go test -v ./...
-      #
-      - uses: "marvinpinto/action-automatic-releases@latest"
+          go-version: 19.x
+
+      - name: Build and test
+        run: |
+          go build .
+          go test -v ./...
+
+      - name: Create release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: actions/create-release@v3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
           prerelease: false
-          files: |
-            LICENSE
-      #
-    #
-  #
-#
