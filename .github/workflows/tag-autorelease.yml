@@ -3,7 +3,7 @@ name: "tagged-release"
 on:
   push:
     tags:
-      - '**'      
+      - '**'  
 #
 env:
   APP_ENV: runner
