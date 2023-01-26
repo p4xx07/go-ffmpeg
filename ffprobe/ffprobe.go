@@ -6,6 +6,13 @@ import (
 	"os/exec"
 )
 
+type IFfprobe interface {
+	GetAudioStreams(input string) (*Probe, error)
+	GetVideoStreams(input string) (*Probe, error)
+	GetStreams(args ...string) (*Probe, error)
+	GetProbe(args ...string) (*Probe, error)
+}
+
 type Ffprobe struct {
 	Configuration configuration.Configuration
 	Headers       []string
