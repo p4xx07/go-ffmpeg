@@ -2,7 +2,7 @@ package ffmpeg
 
 import (
 	"fmt"
-	"github.com/Paxx-RnD/go-helper/slice_helper"
+	"github.com/Paxx-RnD/go-helper/helpers/slice_helper"
 	"os/exec"
 	"strings"
 )
