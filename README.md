@@ -8,7 +8,45 @@
 go get github.com/Paxx-RnD/go-ffmpeg
 ```
 
-### Example
+### Simple Example 
+```go
+func main(){
+    f := ffmpeg.Ffmpeg{
+    Configuration: configuration.Configuration{
+            FfmpegPath: "/usr/bin/ffmpeg"
+        }
+    }
+
+    args := f.
+        Input("/path/to/video.mp4").
+        Output("/path/to/output.mp4").
+        Build()
+
+    f.Run(args)
+}
+```
+### Example with bitrate and codecs
+```go
+func main(){
+    f := ffmpeg.Ffmpeg{
+    Configuration: configuration.Configuration{
+            FfmpegPath: "/usr/bin/ffmpeg"
+        }
+    }
+
+    args := f.
+        Input("/path/to/video.mp4").
+        BitrateVideo(common_bitrates.VideoBitrate100K).
+        BitrateAudio(common_bitrates.AudioBitrate128K).
+        CodecVideo(codec_video.LIBX264).
+        CodecAudio(codec_audio.AAC).
+        Output("/path/to/output.mp4").
+        Build()
+
+    f.Run(args)
+}
+```
+### Example with Filter Complex
 ```go
 func main(){
     f := ffmpeg.Ffmpeg{
@@ -25,7 +63,7 @@ func main(){
         Fps("0:v", 15, "fps1").
         Scale("fps1", 100, 100, "scale").
         Map("scale").
-        Output("path/to/output.mp4").
+        Output("/path/to/output.mp4").
         Build()
         
     f.Run(args)
