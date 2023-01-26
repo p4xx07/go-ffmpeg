@@ -2,7 +2,7 @@ package ffmpeg
 
 import (
 	"fmt"
-	"github.com/Paxx-RnD/go-ffmpeg/helper"
+	"github.com/Paxx-RnD/go-helper/slice_helper"
 	"os/exec"
 	"strings"
 )
@@ -47,7 +47,7 @@ func (f *Ffmpeg) Run(args []string) error {
 	command.Args = append(command.Args, f.Headers...)
 	command.Args = append(command.Args, args...)
 
-	command.Args = helper.RemoveEmptyEntries(command.Args)
+	command.Args = slice_helper.RemoveEmptyEntries(command.Args)
 
 	if f.Configuration.IsDebug {
 		fmt.Println(strings.Join(command.Args, " "))

@@ -1,3 +1,7 @@
+github.com/Paxx-RnD/go-helper v1.0.0 h1:IUJGFCTjYDfDPC6Dbu7pbqDJqgcAhOw4b4skX3iZfHo=
+github.com/Paxx-RnD/go-helper v1.0.0/go.mod h1:wyPvFHaG0n5BsqXZCXOxYW87N8PhLVnCDcXLYXPS6g8=
+github.com/Paxx-RnD/go-helper v1.0.1 h1:MCSJfslWwm3HWGw47bVUfKQWfFqBcfRpY0gq1wcsk4Y=
+github.com/Paxx-RnD/go-helper v1.0.1/go.mod h1:wyPvFHaG0n5BsqXZCXOxYW87N8PhLVnCDcXLYXPS6g8=
 github.com/caarlos0/env/v6 v6.10.1 h1:t1mPSxNpei6M5yAeu1qtRdPAK29Nbcf/n3G7x+b3/II=
 github.com/caarlos0/env/v6 v6.10.1/go.mod h1:hvp/ryKXKipEkcuYjs9mI4bBCg+UI0Yhgm5Zu0ddvwc=
 github.com/joho/godotenv v1.4.0 h1:3l4+N6zfMWnkbPEXKng2o2/MR5mSwTrBih4ZEkkz1lg=

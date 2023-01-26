@@ -3,7 +3,7 @@ package ffmpeg
 import (
 	"fmt"
 	"github.com/Paxx-RnD/go-ffmpeg/constants/pixel_formats"
-	"github.com/Paxx-RnD/go-ffmpeg/helper"
+	"github.com/Paxx-RnD/go-helper/helpers/boolean_helper"
 )
 
 type Chain Ffmpeg
@@ -60,7 +60,7 @@ func (fg *Chain) AlphaExtract(input string, output string) *Chain {
 }
 
 func (fg *Chain) AlphaMerge(input string, mask string, shortest bool, output string) *Chain {
-	short := helper.TernaryBool(shortest)
+	short := boolean_helper.ToInt(shortest)
 	chain := fmt.Sprintf("[%s][%s]alphamerge=shortest=%d[%s]", input, mask, short, output)
 	fg.arguments.FilterGraph.FilterChain = append(fg.arguments.FilterGraph.FilterChain, chain)
 	return fg
@@ -72,8 +72,8 @@ func (fg *Chain) Concat(inputs []string, videoEnable bool, audioEnable bool, out
 		toConcat[i] = fmt.Sprintf("[%s]", input)
 	}
 
-	vFlag := helper.TernaryBool(videoEnable)
-	aFlag := helper.TernaryBool(audioEnable)
+	vFlag := boolean_helper.ToInt(videoEnable)
+	aFlag := boolean_helper.ToInt(audioEnable)
 
 	chain := fmt.Sprintf("%sconcat=v=%d:a=%d[%s]", toConcat, vFlag, aFlag, output)
 	fg.arguments.FilterGraph.FilterChain = append(fg.arguments.FilterGraph.FilterChain, chain)
@@ -81,7 +81,7 @@ func (fg *Chain) Concat(inputs []string, videoEnable bool, audioEnable bool, out
 }
 
 func (fg *Chain) Overlay(under string, over string, shortest bool, output string) *Chain {
-	short := helper.TernaryBool(shortest)
+	short := boolean_helper.ToInt(shortest)
 	chain := fmt.Sprintf("[%s][%s]overlay=shortest=%d[%s]", under, over, short, output)
 	fg.arguments.FilterGraph.FilterChain = append(fg.arguments.FilterGraph.FilterChain, chain)
 	return fg
