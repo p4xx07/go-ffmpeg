@@ -7,9 +7,10 @@ import (
 )
 
 func Test_Flanger(t *testing.T) {
+	f := GetFfmpeg()
+
 	expected := fmt.Sprintf("-i %s -af flanger=delay=15.000000 %s", input, output)
 
-	f := GetFfmpeg()
 	args := f.
 		Input(input).
 		Flanger(15).
