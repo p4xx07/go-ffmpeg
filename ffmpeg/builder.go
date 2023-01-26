@@ -10,33 +10,33 @@ import (
 type Builder Ffmpeg
 
 func (f *Ffmpeg) Output(path string) *Builder {
-	f.Arguments.Outputs.Append(path)
+	f.arguments.Outputs.Append(path)
 	return (*Builder)(f)
 }
 
 func (f *Builder) Output(path string) *Builder {
-	f.Arguments.Outputs.Append(path)
+	f.arguments.Outputs.Append(path)
 	return f
 }
 
 func (f *Ffmpeg) Outputs(paths ...string) *Builder {
 	for _, p := range paths {
-		f.Arguments.Outputs.Append(p)
+		f.arguments.Outputs.Append(p)
 	}
 	return (*Builder)(f)
 }
 
 func (f *Builder) Build() []string {
 	var args []string
-	args = append(args, f.Arguments.Inputs.Build()...)
-	if len(f.Arguments.FilterGraph.FilterChain) == 0 {
-		args = append(args, f.Arguments.VideoFilters.Build()...)
-		args = append(args, f.Arguments.AudioFilters.Build()...)
+	args = append(args, f.arguments.Inputs.Build()...)
+	if len(f.arguments.FilterGraph.FilterChain) == 0 {
+		args = append(args, f.arguments.VideoFilters.Build()...)
+		args = append(args, f.arguments.AudioFilters.Build()...)
 	} else {
-		args = append(args, f.Arguments.FilterGraph.Build()...)
+		args = append(args, f.arguments.FilterGraph.Build()...)
 	}
-	args = append(args, f.Arguments.Options.Build()...)
-	args = append(args, f.Arguments.Outputs.Build()...)
+	args = append(args, f.arguments.Options.Build()...)
+	args = append(args, f.arguments.Outputs.Build()...)
 
 	return args
 }

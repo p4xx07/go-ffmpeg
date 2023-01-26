@@ -21,6 +21,6 @@ func (f *Ffmpeg) Flanger(delay float64) *Ffmpeg {
 			},
 		},
 	}
-	f.Arguments.AudioFilters.Append(filter)
+	f.arguments.AudioFilters.Append(filter)
 	return f
 }

@@ -9,7 +9,7 @@ type FilterGraph struct {
 
 func (f *Ffmpeg) FilterGraph() *Chain {
 	return &Chain{
-		Arguments:     f.Arguments,
+		arguments:     f.arguments,
 		Configuration: f.Configuration,
 		Headers:       f.Headers,
 	}

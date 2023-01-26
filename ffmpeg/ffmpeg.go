@@ -6,7 +6,7 @@ import (
 )
 
 type Ffmpeg struct {
-	Arguments     Arguments
+	arguments     Arguments
 	Configuration configuration.Configuration
 	Headers       []string
 }
@@ -21,13 +21,13 @@ type Arguments struct {
 }
 
 func (f *Ffmpeg) Input(path string) *Ffmpeg {
-	f.Arguments.Inputs.Append(path)
+	f.arguments.Inputs.Append(path)
 	return f
 }
 
 func (f *Ffmpeg) Inputs(paths ...string) *Ffmpeg {
 	for _, p := range paths {
-		f.Arguments.Inputs.Append(p)
+		f.arguments.Inputs.Append(p)
 	}
 	return f
 }

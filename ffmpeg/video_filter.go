@@ -19,7 +19,7 @@ func (f *Ffmpeg) Scale(width int, height int) *Ffmpeg {
 			},
 		},
 	}
-	f.Arguments.VideoFilters.Append(filter)
+	f.arguments.VideoFilters.Append(filter)
 	return f
 }
 
@@ -33,6 +33,6 @@ func (f *Ffmpeg) Fps(fps float64) *Ffmpeg {
 			},
 		},
 	}
-	f.Arguments.VideoFilters.Append(filter)
+	f.arguments.VideoFilters.Append(filter)
 	return f
 }
