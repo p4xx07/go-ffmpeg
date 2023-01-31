@@ -79,3 +79,21 @@ type Tags struct {
 	HandlerName  string    `json:"handler_name"`
 	VendorId     string    `json:"vendor_id"`
 }
+
+func (p *Probe) GetFirstVideoStream() *Stream {
+	for _, v := range p.Streams {
+		if v.CodecType == "video" {
+			return &v
+		}
+	}
+	return nil
+}
+
+func (p *Probe) GetFirstAudioStream() *Stream {
+	for _, v := range p.Streams {
+		if v.CodecType == "audio" {
+			return &v
+		}
+	}
+	return nil
+}
