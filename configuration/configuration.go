@@ -10,11 +10,11 @@ type Configuration struct {
 	TestOutput  string `env:"TEST_OUTPUT"`
 }
 
-func GetConfiguration() Configuration {
+func GetConfiguration() *Configuration {
 	configuration := Configuration{}
 	err := env.Parse(&configuration)
 	if err != nil {
 		panic("failed to read configuration")
 	}
-	return configuration
+	return &configuration
 }

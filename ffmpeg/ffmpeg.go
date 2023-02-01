@@ -7,7 +7,7 @@ import (
 
 type Ffmpeg struct {
 	arguments     Arguments
-	Configuration configuration.Configuration
+	Configuration *configuration.Configuration
 	Headers       []string
 }
 

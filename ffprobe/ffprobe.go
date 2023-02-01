@@ -14,7 +14,7 @@ type IFfprobe interface {
 }
 
 type Ffprobe struct {
-	Configuration configuration.Configuration
+	Configuration *configuration.Configuration
 	Headers       []string
 }
 
