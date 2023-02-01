@@ -36,7 +36,6 @@ func (p *Ffprobe) GetVideoStreams(input string) (*Probe, error) {
 
 func (p *Ffprobe) GetStreams(args ...string) (*Probe, error) {
 	cArgs := []string{
-		"-print_format", "json",
 		"-show_streams",
 	}
 
@@ -46,6 +45,7 @@ func (p *Ffprobe) GetStreams(args ...string) (*Probe, error) {
 
 func (p *Ffprobe) GetProbe(args ...string) (*Probe, error) {
 	cmd := exec.Command(p.Configuration.FfprobePath)
+	cmd.Args = append(cmd.Args, "-print_format", "json")
 	cmd.Args = append(cmd.Args, args...)
 
 	output, err := cmd.Output()
