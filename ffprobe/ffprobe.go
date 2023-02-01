@@ -9,7 +9,6 @@ import (
 type IFfprobe interface {
 	GetAudioStreams(input string) (*Probe, error)
 	GetVideoStreams(input string) (*Probe, error)
-	GetStreams(args ...string) (*Probe, error)
 	GetProbe(args ...string) (*Probe, error)
 }
 
@@ -23,7 +22,7 @@ func (p *Ffprobe) GetAudioStreams(input string) (*Probe, error) {
 		"-select_streams", "a",
 		input,
 	}
-	return p.GetStreams(args...)
+	return p.GetProbe(args...)
 }
 
 func (p *Ffprobe) GetVideoStreams(input string) (*Probe, error) {
@@ -31,21 +30,17 @@ func (p *Ffprobe) GetVideoStreams(input string) (*Probe, error) {
 		"-select_streams", "v",
 		input,
 	}
-	return p.GetStreams(args...)
-}
-
-func (p *Ffprobe) GetStreams(args ...string) (*Probe, error) {
-	cArgs := []string{
-		"-show_streams",
-	}
-
-	cArgs = append(cArgs, args...)
-	return p.GetProbe(cArgs...)
+	return p.GetProbe(args...)
 }
 
 func (p *Ffprobe) GetProbe(args ...string) (*Probe, error) {
 	cmd := exec.Command(p.Configuration.FfprobePath)
-	cmd.Args = append(cmd.Args, "-print_format", "json")
+	cArgs := []string{
+		"-show_streams",
+		"-print_format", "json",
+	}
+
+	cmd.Args = append(cmd.Args, cArgs...)
 	cmd.Args = append(cmd.Args, args...)
 
 	output, err := cmd.Output()

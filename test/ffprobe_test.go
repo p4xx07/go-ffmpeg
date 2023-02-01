@@ -8,7 +8,7 @@ import (
 func Test_FfprobeStreams(t *testing.T) {
 	expected := 2
 	ffprobe := GetFfprobe()
-	probe, err := ffprobe.GetStreams(input)
+	probe, err := ffprobe.GetProbe(input)
 	if err != nil {
 		panic(fmt.Sprintf("could not probe %s", err.Error()))
 	}
