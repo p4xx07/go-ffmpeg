@@ -1,0 +1,55 @@
+name: Main Auto Tag
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  tagged-release:
+    name: "Main Auto Tag"
+    runs-on: "ubuntu-latest"
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Add ffmpeg dependency
+        uses: FedericoCarboni/setup-ffmpeg@v2
+        id: setup-ffmpeg
+
+      - uses: Paxx-RnD/incremental-tag@master
+        id: tag_step
+        with:
+          flag_branch: true
+          message: Bump version
+          prev_tag: 'v'
+          update_odoo_module_version: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Get the newly created tag
+        run: echo "The new tag is ${{ steps.tag_step.outputs.tag }}"
+        
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: 1.19
+
+      - name: Build
+        run: go build -v ./...
+
+      - name: Test with the Go CLI
+        run: go test -v ./...
+
+      - name: Create release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.tag_step.outputs.tag }}
+          release_name: Release ${{ steps.tag_step.outputs.tag }}
+          draft: false
+          prerelease: false
