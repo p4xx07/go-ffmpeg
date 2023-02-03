@@ -11,56 +11,74 @@ last_modified_date: 2023-01-23T17:00:00+0000
 
 go-ffmpeg is a Go library for running FFmpeg commands. It provides a simple and convenient way to execute FFmpeg commands and retrieve their output.
 
-## Installation
-Use `go get` to install the library:
+# Go Ffmpeg
 
-```bash
+[![Go build](https://github.com/Paxx-RnD/go-ffmpeg/actions/workflows/go-build.yml/badge.svg)](https://github.com/Paxx-RnD/go-ffmpeg/actions/workflows/go-build.yml)
+[![Go Test workflow](https://github.com/Paxx-RnD/go-ffmpeg/actions/workflows/go-test.yml/badge.svg)](https://github.com/Paxx-RnD/go-ffmpeg/actions/workflows/go-test.yml)
+
+## Install
+```
 go get github.com/Paxx-RnD/go-ffmpeg
 ```
 
-## Usage
-Here is an example of how to use the library:
-
+### Simple Example 
 ```go
+func main(){
+    f := ffmpeg.Ffmpeg{
+    Configuration: configuration.Configuration{
+            FfmpegPath: "/usr/bin/ffmpeg"
+        }
+    }
 
-package main
+    args := f.
+        Input("/path/to/video.mp4").
+        Output("/path/to/output.mp4").
+        Build()
 
-import (
-	"fmt"
-
-	ffmpeg "github.com/Paxx-RnD/go-ffmpeg"
-)
-
-func main() {
-	// Create a new FFmpeg instance
-	cmd := ffmpeg.New("/usr/local/bin/ffmpeg")
-
-	// Set the input file
-	input := ffmpeg.Input("input.mp4")
-
-	// Set the output file
-	output := ffmpeg.Output("output.mp3")
-
-	// Set the audio codec
-	audio := ffmpeg.AudioCodec("libmp3lame")
-
-	// Build the command
-	cmd.Input(input).Output(output).AudioCodec(audio)
-
-	// Run the command
-	output, err := cmd.Run()
-	if err != nil {
-		fmt.Println("Error:", err)
-		return
-	}
-
-	// Print the output
-	fmt.Println(output)
+    f.Run(args)
 }
 ```
+### Example with bitrate and codecs
+```go
+func main(){
+    f := ffmpeg.Ffmpeg{
+    Configuration: configuration.Configuration{
+            FfmpegPath: "/usr/bin/ffmpeg"
+        }
+    }
 
-## Contributing
-We welcome contributions to this project. If you want to contribute, please fork the repository and submit a pull request with your changes.
+    args := f.
+        Input("/path/to/video.mp4").
+        BitrateVideo(common_bitrates.VideoBitrate100K).
+        BitrateAudio(common_bitrates.AudioBitrate128K).
+        CodecVideo(codec_video.LIBX264).
+        CodecAudio(codec_audio.AAC).
+        Output("/path/to/output.mp4").
+        Build()
 
-## License
-go-ffmpeg is licensed under the MIT License. See LICENSE for more information.
+    f.Run(args)
+}
+```
+### Example with Filter Complex
+```go
+func main(){
+    f := ffmpeg.Ffmpeg{
+            Configuration: configuration.Configuration{
+                FfmpegPath: "/usr/bin/ffmpeg"
+            }
+        }
+
+    args := f.
+        Input("/path/to/video.mp4").
+        CodecVideo(codec_video.LIBX264).
+        CodecAudio(codec_audio.AAC).
+        FilterGraph().
+        Fps("0:v", 15, "fps1").
+        Scale("fps1", 100, 100, "scale").
+        Map("scale").
+        Output("/path/to/output.mp4").
+        Build()
+        
+    f.Run(args)
+}
+```
