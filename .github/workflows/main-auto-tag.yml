@@ -4,6 +4,9 @@ on:
     branches:
       - main
 
+env:
+  APP_ENV: runner
+  
 jobs:
   tagged-release:
     name: "Main Auto Tag"
