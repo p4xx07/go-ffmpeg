@@ -42,15 +42,14 @@ func GetFfmpeg() *ffmpeg.Ffmpeg {
 	return &f
 }
 
-func GetFfprobe() *ffprobe.Ffprobe {
-	f := ffprobe.Ffprobe{
-		Configuration: configuration.GetConfiguration(),
-	}
+func GetFfprobe() ffprobe.IFfprobe {
+	configuration := configuration.GetConfiguration()
+	f := ffprobe.NewFfProbe(configuration, nil)
 
-	input = f.Configuration.TestInput
-	output = f.Configuration.TestOutput
+	input = configuration.TestInput
+	output = configuration.TestOutput
 
-	return &f
+	return f
 }
 
 func PrintPanic(expected any, actual any) {

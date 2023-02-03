@@ -12,12 +12,19 @@ type IFfprobe interface {
 	GetProbe(args ...string) (*Probe, error)
 }
 
-type Ffprobe struct {
-	Configuration *configuration.Configuration
-	Headers       []string
+func NewFfProbe(configuration *configuration.Configuration, headers []string) IFfprobe {
+	return &ffprobe{
+		configuration: configuration,
+		headers:       headers,
+	}
 }
 
-func (p *Ffprobe) GetAudioStreams(input string) (*Probe, error) {
+type ffprobe struct {
+	configuration *configuration.Configuration
+	headers       []string
+}
+
+func (p *ffprobe) GetAudioStreams(input string) (*Probe, error) {
 	args := []string{
 		"-select_streams", "a",
 		input,
@@ -25,7 +32,7 @@ func (p *Ffprobe) GetAudioStreams(input string) (*Probe, error) {
 	return p.GetProbe(args...)
 }
 
-func (p *Ffprobe) GetVideoStreams(input string) (*Probe, error) {
+func (p *ffprobe) GetVideoStreams(input string) (*Probe, error) {
 	args := []string{
 		"-select_streams", "v",
 		input,
@@ -33,8 +40,8 @@ func (p *Ffprobe) GetVideoStreams(input string) (*Probe, error) {
 	return p.GetProbe(args...)
 }
 
-func (p *Ffprobe) GetProbe(args ...string) (*Probe, error) {
-	cmd := exec.Command(p.Configuration.FfprobePath)
+func (p *ffprobe) GetProbe(args ...string) (*Probe, error) {
+	cmd := exec.Command(p.configuration.FfprobePath)
 	cArgs := []string{
 		"-show_streams",
 		"-print_format", "json",
