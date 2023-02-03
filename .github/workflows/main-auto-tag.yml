@@ -4,6 +4,9 @@ on:
     branches:
       - main
 
+env:
+  APP_ENV: runner
+  
 jobs:
   tagged-release:
     name: "Main Auto Tag"
@@ -46,6 +49,7 @@ jobs:
 
       - name: Create release
         uses: actions/create-release@v1
+        if: startsWith(github.event.head_commit.message, 'release:')
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:

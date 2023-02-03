@@ -14,6 +14,12 @@ func (fg *Chain) Format(input string, format pixel_formats.PixelFormat, output s
 	return fg
 }
 
+func (fg *Chain) Pad(input string, width int, height int, x int, y int, output string) *Chain {
+	chain := fmt.Sprintf("[%s]pad=width=%d:height=%d:x=%d:y=%d[%s]", input, width, height, x, y, output)
+	fg.arguments.FilterGraph.FilterChain = append(fg.arguments.FilterGraph.FilterChain, chain)
+	return fg
+}
+
 func (fg *Chain) Fps(input string, fps float64, output string) *Chain {
 	chain := fmt.Sprintf("[%s]fps=fps=%f[%s]", input, fps, output)
 	fg.arguments.FilterGraph.FilterChain = append(fg.arguments.FilterGraph.FilterChain, chain)
