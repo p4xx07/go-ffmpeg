@@ -48,7 +48,7 @@ jobs:
       - name: Test with the Go CLI
         run: go test -v ./...
 
-      - name: Create release
+      - name: Create release ${{ steps.tag_step.outputs.tag }}
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
