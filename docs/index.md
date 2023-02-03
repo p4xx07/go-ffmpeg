@@ -6,11 +6,6 @@ description: "GO FFmpegDocs"
 permalink: /
 last_modified_date: 2023-01-23T17:00:00+0000
 ---
-
-# GO FFmpeg Official Documentation
-
-go-ffmpeg is a Go library for running FFmpeg commands. It provides a simple and convenient way to execute FFmpeg commands and retrieve their output.
-
 # Go Ffmpeg
 
 [![Go build](https://github.com/Paxx-RnD/go-ffmpeg/actions/workflows/go-build.yml/badge.svg)](https://github.com/Paxx-RnD/go-ffmpeg/actions/workflows/go-build.yml)
