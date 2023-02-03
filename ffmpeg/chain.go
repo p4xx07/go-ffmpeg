@@ -20,6 +20,12 @@ func (fg *Chain) Pad(input string, width int, height int, x int, y int, output s
 	return fg
 }
 
+func (fg *Chain) Volume(input string, volume float64, output string) *Chain {
+	chain := fmt.Sprintf("[%s]volume=volume=%f[%s]", input, volume, output)
+	fg.arguments.FilterGraph.FilterChain = append(fg.arguments.FilterGraph.FilterChain, chain)
+	return fg
+}
+
 func (fg *Chain) Fps(input string, fps float64, output string) *Chain {
 	chain := fmt.Sprintf("[%s]fps=fps=%f[%s]", input, fps, output)
 	fg.arguments.FilterGraph.FilterChain = append(fg.arguments.FilterGraph.FilterChain, chain)
