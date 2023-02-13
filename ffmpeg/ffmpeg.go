@@ -13,7 +13,7 @@ type Ffmpeg struct {
 
 type Arguments struct {
 	Inputs       arguments.Inputs
-	Outputs      arguments.Outputs
+	Output       arguments.Outputs
 	VideoFilters arguments.VideoFilters
 	AudioFilters arguments.AudioFilters
 	FilterGraph  FilterGraph

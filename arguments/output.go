@@ -1,12 +1,12 @@
 package arguments
 
-type Outputs []string
+type Outputs string
 
 func (i *Outputs) Append(path string) *Outputs {
-	*i = append(*i, path)
+	*i = Outputs(path)
 	return i
 }
 
 func (i *Outputs) Build() []string {
-	return *i
+	return []string{string(*i)}
 }

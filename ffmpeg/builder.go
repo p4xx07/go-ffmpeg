@@ -10,19 +10,7 @@ import (
 type Builder Ffmpeg
 
 func (f *Ffmpeg) Output(path string) *Builder {
-	f.arguments.Outputs.Append(path)
-	return (*Builder)(f)
-}
-
-func (f *Builder) Output(path string) *Builder {
-	f.arguments.Outputs.Append(path)
-	return f
-}
-
-func (f *Ffmpeg) Outputs(paths ...string) *Builder {
-	for _, p := range paths {
-		f.arguments.Outputs.Append(p)
-	}
+	f.arguments.Output.Append(path)
 	return (*Builder)(f)
 }
 
@@ -36,7 +24,7 @@ func (f *Builder) Build() []string {
 		args = append(args, f.arguments.FilterGraph.Build()...)
 	}
 	args = append(args, f.arguments.Options.Build()...)
-	args = append(args, f.arguments.Outputs.Build()...)
+	args = append(args, f.arguments.Output.Build()...)
 
 	return args
 }

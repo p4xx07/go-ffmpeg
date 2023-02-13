@@ -1,5 +1,7 @@
 package ffmpeg
 
+import "github.com/Paxx-RnD/go-ffmpeg/arguments"
+
 type Map Ffmpeg
 
 func (fg *Chain) Map(output string) *Map {
@@ -23,5 +25,6 @@ func (m *Map) Output(output string) *Builder {
 		Configuration: m.Configuration,
 		Headers:       m.Headers,
 	}
-	return builder.Output(output)
+	builder.arguments.Output = arguments.Outputs(output)
+	return &builder
 }
