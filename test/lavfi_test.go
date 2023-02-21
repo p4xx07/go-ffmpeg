@@ -13,7 +13,7 @@ func Test_Lavfi(t *testing.T) {
 	expected := fmt.Sprintf("-f lavfi -i %s -af flanger=delay=15.000000 %s", inputLavfi, output)
 
 	args := f.
-		InputLavfi(input).
+		InputLavfi(inputLavfi).
 		Flanger(15).
 		Output(output).
 		Build()
