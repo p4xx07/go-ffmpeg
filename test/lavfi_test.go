@@ -9,7 +9,7 @@ import (
 func Test_Lavfi(t *testing.T) {
 	f := GetFfmpeg()
 
-	inputLavfi := "color=c=black:duration=3"
+	inputLavfi := "color=c=black:duration=5"
 	expected := fmt.Sprintf("-f lavfi -i %s -af flanger=delay=15.000000 %s", inputLavfi, output)
 
 	args := f.
