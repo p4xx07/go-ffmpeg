@@ -21,19 +21,6 @@ jobs:
         uses: FedericoCarboni/setup-ffmpeg@v2
         id: setup-ffmpeg
 
-      - uses: Paxx-RnD/incremental-tag@master
-        id: tag_step
-        with:
-          flag_branch: true
-          message: Bump version
-          prev_tag: 'v'
-          update_odoo_module_version: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
-      - name: Get the newly created tag
-        run: echo "The new tag is ${{ steps.tag_step.outputs.tag }}"
-        
       - name: Checkout code
         uses: actions/checkout@v3
 
@@ -48,7 +35,20 @@ jobs:
       - name: Test with the Go CLI
         run: go test -v ./...
 
-      - name: Create release 
+      - uses: Paxx-RnD/incremental-tag@master
+        id: tag_step
+        with:
+          flag_branch: true
+          message: Bump version
+          prev_tag: 'v'
+          update_odoo_module_version: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Get the newly created tag
+        run: echo "The new tag is ${{ steps.tag_step.outputs.tag }}"
+        
+      - name: Create release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
