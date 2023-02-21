@@ -17,6 +17,7 @@ type IFfmpeg interface {
 	Fps(fps float64) IFfmpeg
 	FilterGraph() IChain
 	Input(path string) IFfmpeg
+	InputLavfi(filter string) IFfmpeg
 	Inputs(paths ...string) IFfmpeg
 	Output(path string) IBuilder
 	Run(args []string) error
@@ -45,13 +46,21 @@ func NewFfmpeg(configuration *configuration.Configuration, headers []string) IFf
 }
 
 func (f *ffmpeg) Input(path string) IFfmpeg {
-	f.arguments.Inputs.Append(path)
+	input := arguments.NewInput(path, false)
+	f.arguments.Inputs.Append(input)
+	return f
+}
+
+func (f *ffmpeg) InputLavfi(filter string) IFfmpeg {
+	input := arguments.NewInput(filter, true)
+	f.arguments.Inputs.Append(input)
 	return f
 }
 
 func (f *ffmpeg) Inputs(paths ...string) IFfmpeg {
 	for _, p := range paths {
-		f.arguments.Inputs.Append(p)
+		input := arguments.NewInput(p, false)
+		f.arguments.Inputs.Append(input)
 	}
 	return f
 }

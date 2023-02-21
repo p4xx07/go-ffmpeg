@@ -1,17 +1,33 @@
 package arguments
 
-type Inputs []string
+type Inputs []input
+type input struct {
+	value   string
+	isLavfi bool
+}
 
-func (i *Inputs) Append(path string) *Inputs {
-	*i = append(*i, path)
+func NewInput(value string, isLavfi bool) input {
+	return input{
+		value:   value,
+		isLavfi: isLavfi,
+	}
+}
+
+func (i *Inputs) Append(input input) *Inputs {
+	*i = append(*i, input)
 	return i
 }
 
 func (i *Inputs) Build() []string {
 	var result []string
 	for _, v := range *i {
+		if v.isLavfi {
+			result = append(result, "-f")
+			result = append(result, "lavfi")
+		}
+
 		result = append(result, "-i")
-		result = append(result, v)
+		result = append(result, v.value)
 	}
 	return result
 }
