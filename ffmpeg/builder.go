@@ -7,9 +7,13 @@ import (
 	"strings"
 )
 
+type IBuilder interface {
+	Build() []string
+}
+
 type Builder Ffmpeg
 
-func (f *Ffmpeg) Output(path string) *Builder {
+func (f *Ffmpeg) Output(path string) IBuilder {
 	f.arguments.Output.Append(path)
 	return (*Builder)(f)
 }

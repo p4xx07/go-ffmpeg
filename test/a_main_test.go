@@ -26,7 +26,7 @@ func TestMain(m *testing.M) {
 	m.Run()
 }
 
-func GetFfmpeg() *ffmpeg.Ffmpeg {
+func GetFfmpeg() ffmpeg.IFfmpeg {
 	f := ffmpeg.Ffmpeg{
 		Configuration: configuration.GetConfiguration(),
 		Headers: []string{

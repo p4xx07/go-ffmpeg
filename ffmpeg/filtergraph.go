@@ -7,7 +7,7 @@ type FilterGraph struct {
 	MapChain    []string
 }
 
-func (f *Ffmpeg) FilterGraph() *Chain {
+func (f *Ffmpeg) FilterGraph() IChain {
 	return &Chain{
 		arguments:     f.arguments,
 		Configuration: f.Configuration,
