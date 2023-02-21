@@ -27,19 +27,18 @@ func TestMain(m *testing.M) {
 }
 
 func GetFfmpeg() ffmpeg.IFfmpeg {
-	f := ffmpeg.Ffmpeg{
-		Configuration: configuration.GetConfiguration(),
-		Headers: []string{
-			"-y",
-			"-hide_banner",
-			"-loglevel", "info",
-		},
+	configuration := configuration.GetConfiguration()
+	headers := []string{
+		"-y",
+		"-hide_banner",
+		"-loglevel", "info",
 	}
+	f := ffmpeg.NewFfmpeg(configuration, headers)
 
-	input = f.Configuration.TestInput
-	output = f.Configuration.TestOutput
+	input = configuration.TestInput
+	output = configuration.TestOutput
 
-	return &f
+	return f
 }
 
 func GetFfprobe() ffprobe.IFfprobe {

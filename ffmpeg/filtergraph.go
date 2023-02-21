@@ -7,11 +7,11 @@ type FilterGraph struct {
 	MapChain    []string
 }
 
-func (f *Ffmpeg) FilterGraph() IChain {
+func (f *ffmpeg) FilterGraph() IChain {
 	return &Chain{
 		arguments:     f.arguments,
-		Configuration: f.Configuration,
-		Headers:       f.Headers,
+		configuration: f.configuration,
+		headers:       f.headers,
 	}
 }
 

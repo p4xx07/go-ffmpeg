@@ -25,7 +25,7 @@ type IChain interface {
 	Map(output string) IMap
 }
 
-type Chain Ffmpeg
+type Chain ffmpeg
 
 func (fg *Chain) Format(input string, format pixel_formats.PixelFormat, output string) IChain {
 	chain := fmt.Sprintf("[%s]format=%s[%s]", input, format, output)

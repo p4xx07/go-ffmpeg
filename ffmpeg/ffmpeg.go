@@ -22,10 +22,10 @@ type IFfmpeg interface {
 	Run(args []string) error
 }
 
-type Ffmpeg struct {
+type ffmpeg struct {
 	arguments     Arguments
-	Configuration *configuration.Configuration
-	Headers       []string
+	configuration *configuration.Configuration
+	headers       []string
 }
 
 type Arguments struct {
@@ -37,12 +37,19 @@ type Arguments struct {
 	Options      arguments.Options
 }
 
-func (f *Ffmpeg) Input(path string) IFfmpeg {
+func NewFfmpeg(configuration *configuration.Configuration, headers []string) IFfmpeg {
+	return &ffmpeg{
+		configuration: configuration,
+		headers:       headers,
+	}
+}
+
+func (f *ffmpeg) Input(path string) IFfmpeg {
 	f.arguments.Inputs.Append(path)
 	return f
 }
 
-func (f *Ffmpeg) Inputs(paths ...string) IFfmpeg {
+func (f *ffmpeg) Inputs(paths ...string) IFfmpeg {
 	for _, p := range paths {
 		f.arguments.Inputs.Append(p)
 	}

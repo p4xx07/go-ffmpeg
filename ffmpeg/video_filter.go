@@ -5,7 +5,7 @@ import (
 	"github.com/Paxx-RnD/go-ffmpeg/arguments"
 )
 
-func (f *Ffmpeg) Scale(width int, height int) IFfmpeg {
+func (f *ffmpeg) Scale(width int, height int) IFfmpeg {
 	filter := arguments.Filter{
 		Name: "scale",
 		Args: []arguments.FilterArgs{
@@ -23,7 +23,7 @@ func (f *Ffmpeg) Scale(width int, height int) IFfmpeg {
 	return f
 }
 
-func (f *Ffmpeg) Fps(fps float64) IFfmpeg {
+func (f *ffmpeg) Fps(fps float64) IFfmpeg {
 	filter := arguments.Filter{
 		Name: "fps",
 		Args: []arguments.FilterArgs{

@@ -5,7 +5,7 @@ import (
 	"github.com/Paxx-RnD/go-ffmpeg/arguments"
 )
 
-func (f *Ffmpeg) Flanger(delay float64) IFfmpeg {
+func (f *ffmpeg) Flanger(delay float64) IFfmpeg {
 	if delay < 0 {
 		delay = 0
 	} else if delay > 30 {

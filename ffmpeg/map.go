@@ -7,13 +7,13 @@ type IMap interface {
 	Output(output string) IBuilder
 }
 
-type Map Ffmpeg
+type Map ffmpeg
 
 func (fg *Chain) Map(output string) IMap {
 	m := Map{
 		arguments:     fg.arguments,
-		Configuration: fg.Configuration,
-		Headers:       fg.Headers,
+		configuration: fg.configuration,
+		headers:       fg.headers,
 	}
 	m.arguments.FilterGraph.MapChain = append(m.arguments.FilterGraph.MapChain, output)
 	return &m
@@ -27,8 +27,8 @@ func (m *Map) Map(output string) IMap {
 func (m *Map) Output(output string) IBuilder {
 	builder := Builder{
 		arguments:     m.arguments,
-		Configuration: m.Configuration,
-		Headers:       m.Headers,
+		configuration: m.configuration,
+		headers:       m.headers,
 	}
 	builder.arguments.Output = arguments.Outputs(output)
 	return &builder

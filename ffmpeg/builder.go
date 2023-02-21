@@ -11,9 +11,9 @@ type IBuilder interface {
 	Build() []string
 }
 
-type Builder Ffmpeg
+type Builder ffmpeg
 
-func (f *Ffmpeg) Output(path string) IBuilder {
+func (f *ffmpeg) Output(path string) IBuilder {
 	f.arguments.Output.Append(path)
 	return (*Builder)(f)
 }
@@ -33,15 +33,15 @@ func (f *Builder) Build() []string {
 	return args
 }
 
-func (f *Ffmpeg) Run(args []string) error {
-	command := exec.Command(f.Configuration.FfmpegPath)
+func (f *ffmpeg) Run(args []string) error {
+	command := exec.Command(f.configuration.FfmpegPath)
 
-	command.Args = append(command.Args, f.Headers...)
+	command.Args = append(command.Args, f.headers...)
 	command.Args = append(command.Args, args...)
 
 	command.Args = slice_helper.RemoveEmptyEntries(command.Args)
 
-	if f.Configuration.IsDebug {
+	if f.configuration.IsDebug {
 		fmt.Println(strings.Join(command.Args, " "))
 	}
 
