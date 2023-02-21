@@ -31,7 +31,7 @@ func GetFfmpeg() ffmpeg.IFfmpeg {
 	headers := []string{
 		"-y",
 		"-hide_banner",
-		"-loglevel", "warning",
+		"-loglevel", "info",
 	}
 	f := ffmpeg.NewFfmpeg(configuration, headers)
 
