@@ -22,7 +22,7 @@ func main(){
 		"usr/bin/ffprobe",
 		false)
         
-	f := ffmpeg.NewFfmpeg(configuration, headers)
+    f := ffmpeg.NewFfmpeg(configuration, headers)
     
     args := f.
         Input("/path/to/video.mp4").
@@ -46,7 +46,7 @@ func main(){
 		"usr/bin/ffprobe",
 		false)
         
-	f := ffmpeg.NewFfmpeg(configuration, headers)
+    f := ffmpeg.NewFfmpeg(configuration, headers)
 
     args := f.
         Input("/path/to/video.mp4").
@@ -74,7 +74,7 @@ func main(){
 		"usr/bin/ffprobe",
 		false)
         
-	f := ffmpeg.NewFfmpeg(configuration, headers)
+    f := ffmpeg.NewFfmpeg(configuration, headers)
 
     args := f.
         Input("/path/to/video.mp4").
