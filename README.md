@@ -11,12 +11,19 @@ go get github.com/Paxx-RnD/go-ffmpeg
 ### Simple Example 
 ```go
 func main(){
-    f := ffmpeg.Ffmpeg{
-    Configuration: configuration.Configuration{
-            FfmpegPath: "/usr/bin/ffmpeg"
-        }
-    }
-
+   headers := []string{
+		"-y",
+		"-hide_banner",
+		"-loglevel", "info",
+	}
+    
+    configuration := configuration.NewConfiguration(
+		"usr/bin/ffmpeg",
+		"usr/bin/ffprobe",
+		false)
+        
+	f := ffmpeg.NewFfmpeg(configuration, headers)
+    
     args := f.
         Input("/path/to/video.mp4").
         Output("/path/to/output.mp4").
@@ -28,11 +35,18 @@ func main(){
 ### Example with bitrate and codecs
 ```go
 func main(){
-    f := ffmpeg.Ffmpeg{
-    Configuration: configuration.Configuration{
-            FfmpegPath: "/usr/bin/ffmpeg"
-        }
-    }
+    headers := []string{
+		"-y",
+		"-hide_banner",
+		"-loglevel", "info",
+	}
+    
+    configuration := configuration.NewConfiguration(
+		"usr/bin/ffmpeg",
+		"usr/bin/ffprobe",
+		false)
+        
+	f := ffmpeg.NewFfmpeg(configuration, headers)
 
     args := f.
         Input("/path/to/video.mp4").
@@ -49,11 +63,18 @@ func main(){
 ### Example with Filter Complex
 ```go
 func main(){
-    f := ffmpeg.Ffmpeg{
-            Configuration: configuration.Configuration{
-                FfmpegPath: "/usr/bin/ffmpeg"
-            }
-        }
+    headers := []string{
+		"-y",
+		"-hide_banner",
+		"-loglevel", "info",
+	}
+    
+    configuration := configuration.NewConfiguration(
+		"usr/bin/ffmpeg",
+		"usr/bin/ffprobe",
+		false)
+        
+	f := ffmpeg.NewFfmpeg(configuration, headers)
 
     args := f.
         Input("/path/to/video.mp4").
