@@ -38,7 +38,11 @@ func (p *Probe) GetResolution() (width int, height int) {
 	return videoStream.Width, videoStream.Height
 }
 
-func (p *Probe) GetStreamDuration(codecType string) (float64, error) {
+func (p *Probe) GetStreamDuration(codecType ...string) (float64, error) {
+	selected := 'video'
+	if len(codecTypes) > 0{
+		selected = codecType[0]
+	}
 	var selected Stream
 	for _, stream := range p.Streams {
 		if stream.CodecType == codecType {
