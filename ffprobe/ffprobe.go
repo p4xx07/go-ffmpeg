@@ -44,6 +44,7 @@ func (p *ffprobe) GetProbe(args ...string) (*Probe, error) {
 	cmd := exec.Command(p.configuration.FfprobePath)
 	cArgs := []string{
 		"-show_streams",
+		"-show_format",
 		"-print_format", "json",
 	}
 

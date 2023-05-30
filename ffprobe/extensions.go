@@ -38,20 +38,8 @@ func (p *Probe) GetResolution() (width int, height int) {
 	return videoStream.Width, videoStream.Height
 }
 
-func (p *Probe) GetStreamDuration(codecType ...string) (float64, error) {
-	selectedCodec := "video"
-	if len(codecType) > 0 {
-		selectedCodec = codecType[0]
-	}
-	var selected Stream
-	for _, stream := range p.Streams {
-		if stream.CodecType == selectedCodec {
-			selected = stream
-			break
-		}
-	}
-
-	duration, err := strconv.ParseFloat(selected.Duration, 64)
+func (p *Probe) GetStreamDuration() (float64, error) {
+	duration, err := strconv.ParseFloat(p.Format.Duration, 64)
 	if err != nil {
 		return -1, err
 	}

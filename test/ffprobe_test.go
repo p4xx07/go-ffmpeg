@@ -36,6 +36,23 @@ func Test_FfprobeVideoStreams(t *testing.T) {
 	}
 }
 
+func Test_FfprobeVideoStreamsGetDuration(t *testing.T) {
+	ffprobe := GetFfprobe()
+	probe, err := ffprobe.GetProbe(input)
+	if err != nil {
+		panic(fmt.Sprintf("could not probe %s", err.Error()))
+	}
+
+	d, err := probe.GetStreamDuration()
+	if err != nil {
+		panic(fmt.Sprintf("could not get duration %s", err.Error()))
+	}
+
+	if d < 0 {
+		panic(fmt.Sprintf("could not get duration -1 %s", err.Error()))
+	}
+}
+
 func Test_FfprobeAudioStreams(t *testing.T) {
 	expected := 1
 	expectedAudio := "audio"
