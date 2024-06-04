@@ -93,20 +93,36 @@ type Tags struct {
 	VendorId     string    `json:"vendor_id"`
 }
 
-func (p *Probe) GetFirstVideoStream() *Stream {
+func (p *Probe) GetStreams(streamType string) []Stream {
+	result := make([]Stream, 0)
 	for _, v := range p.Streams {
-		if v.CodecType == "video" {
-			return &v
+		if v.CodecType == streamType {
+			result = append(result, v)
 		}
 	}
 	return nil
 }
 
+func (p *Probe) GetFirstVideoStream() *Stream {
+	return &p.GetStreams("video")[0]
+}
+
 func (p *Probe) GetFirstAudioStream() *Stream {
-	for _, v := range p.Streams {
-		if v.CodecType == "audio" {
-			return &v
-		}
-	}
-	return nil
+	return &p.GetStreams("audio")[0]
+}
+
+func (p *Probe) GetVideoStreams() []Stream {
+	return p.GetStreams("video")
+}
+
+func (p *Probe) GetAudioStreams() []Stream {
+	return p.GetStreams("audio")
+}
+
+func (p *Probe) GetSubtitleStreams() []Stream {
+	return p.GetStreams("subtitle")
+}
+
+func (p *Probe) GetDataStreams() []Stream {
+	return p.GetStreams("data")
 }
