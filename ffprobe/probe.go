@@ -100,15 +100,23 @@ func (p *Probe) GetStreams(streamType string) []Stream {
 			result = append(result, v)
 		}
 	}
-	return nil
+	return result
 }
 
 func (p *Probe) GetFirstVideoStream() *Stream {
-	return &p.GetStreams("video")[0]
+	streams := p.GetVideoStreams()
+	if len(streams) == 0 {
+		return nil
+	}
+	return &streams[0]
 }
 
 func (p *Probe) GetFirstAudioStream() *Stream {
-	return &p.GetStreams("audio")[0]
+	streams := p.GetAudioStreams()
+	if len(streams) == 0 {
+		return nil
+	}
+	return &streams[0]
 }
 
 func (p *Probe) GetVideoStreams() []Stream {
